@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Agencies - ICT Governance</title>
+  <meta name="description" content="ICT Governance - Partner Agencies Overview">
+  <meta name="keywords" content="ICT, Governance, Agencies, DICT, DOJ, NBI, NPC">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .agency-card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.08);
+      transition: transform .22s, box-shadow .22s;
+      overflow: hidden;
+    }
+    .agency-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 32px rgba(0,0,0,.13);
+    }
+    .agency-card .card-header-band {
+      height: 8px;
+    }
+    .agency-logo-wrap {
+      width: 80px; height: 80px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; flex-shrink: 0;
+      margin: 0 auto 1rem;
+    }
+    .logo-meaning-toggle { font-size: .78rem; cursor: pointer; }
+    .responsibilities-list li { font-size: .875rem; margin-bottom: .35rem; }
+    .stat-pill {
+      border-radius: 99px; font-size: .78rem;
+      padding: .3rem .85rem; font-weight: 600;
+    }
+  </style>
+</head>
+
+<body class="agencies-page">
+
+  <header id="header" class="header fixed-top">
+  
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename">ICT Governance</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="dropdown"><a href="agencies.html" class="active"><span>Agencies</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="agencies/dict.html"><i class="bi bi-building me-1"></i>DICT</a></li>
+                <li><a href="agencies/doj-cybercrime.html"><i class="bi bi-shield-fill me-1"></i>DOJ Cybercrime Task Force</a></li>
+                <li><a href="agencies/nbi-cybercrime.html"><i class="bi bi-person-badge-fill me-1"></i>NBI Cybercrime Division</a></li>
+                <li><a href="agencies/npc.html"><i class="bi bi-lock-fill me-1"></i>NPC</a></li>
+              </ul>
+            </li>
+            <li><a href="alerts.html">Alerts</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1 class="heading-title">Partner Agencies</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Agencies</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Agencies Overview Section -->
+    <section id="agencies-overview" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Agency Overview</h2>
+      </div>
+
+      <div class="container">
+        <div class="row gy-4">
+
+          <!-- ── DICT ── -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="60">
+            <div class="card agency-card h-100">
+              <div class="card-header-band bg-primary"></div>
+              <div class="card-body p-4">
+
+                <!-- Logo & Name -->
+                <div class="text-center mb-3">
+                  <div class="agency-logo-wrap bg-light border p-2">
+                    <img src="assets/img/dict.png" alt="DICT Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                  </div>
+                  <h4 class="fw-bold text-primary mb-0">DICT</h4>
+                  <p class="text-muted mb-2" style="font-size:.82rem;">Department of Information and Communications Technology</p>
+                  <p class="text-muted small mb-0 pt-1 text-start" style="border-top:1px solid #eee;">The DICT is the primary policy-making and administrative entity of the Executive Branch responsible for planning, developing, and promoting the national ICT development agenda.</p>
+                </div>
+
+                <!-- Logo Meaning -->
+                <div class="mb-3">
+                  <button class="btn btn-sm btn-outline-primary w-100 logo-meaning-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#logoMeaningDICT">
+                    <i class="bi bi-info-circle me-1"></i> Logo Meaning
+                  </button>
+                  <div class="collapse mt-2" id="logoMeaningDICT">
+                    <div class="card card-body py-2 bg-primary bg-opacity-10 border-0" style="font-size:.82rem;">
+                      The logo features 17 dots representing the 17 regions of the Philippines connected by technology. The radiating lines symbolize frequency waves and the "pulsating" nature of ICT, while the binary numbers around the sphere represent the acronym "DICT" and "2016" (the year it was established).
+                    </div>
+                  </div>
+                </div>
+
+                <a href="agencies/dict.html" class="btn btn-primary w-100 mt-auto">
+                  <i class="bi bi-arrow-right-circle me-2"></i>View Full Profile
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── DOJ Cybercrime Task Force ── -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="120">
+            <div class="card agency-card h-100">
+              <div class="card-header-band bg-danger"></div>
+              <div class="card-body p-4">
+
+                <div class="text-center mb-3">
+                  <div class="agency-logo-wrap bg-light border p-2">
+                    <img src="assets/img/doj.jpg" alt="DOJ Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                  </div>
+                  <h4 class="fw-bold text-danger mb-0">DOJ – CTF</h4>
+                  <p class="text-muted mb-2" style="font-size:.82rem;">Department of Justice – Cybercrime Task Force</p>
+                  <p class="text-muted small mb-0 pt-1 text-start" style="border-top:1px solid #eee;">The DOJ - Office of Cybercrime (OOC) is the lead government agency responsible for implementing the Cybercrime Prevention Act of 2012 (R.A. 10175).</p>
+                </div>
+
+                <div class="mb-3">
+                  <button class="btn btn-sm btn-outline-danger w-100 logo-meaning-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#logoMeaningDOJ">
+                    <i class="bi bi-info-circle me-1"></i> Logo Meaning
+                  </button>
+                  <div class="collapse mt-2" id="logoMeaningDOJ">
+                    <div class="card card-body py-2 bg-danger bg-opacity-10 border-0" style="font-size:.82rem;">
+                      The DOJ seal features a balanced scale (symbolizing equality) over a sword (symbolizing authority in the dispensation of justice), set against a map of the Philippines. The Latin maxim "Justitiae Pax Opus" means "Justice is the work of peace."
+                    </div>
+                  </div>
+                </div>
+
+                <a href="agencies/doj-cybercrime.html" class="btn btn-danger w-100 mt-auto">
+                  <i class="bi bi-arrow-right-circle me-2"></i>View Full Profile
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── NBI Cybercrime Division ── -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="180">
+            <div class="card agency-card h-100">
+              <div class="card-header-band bg-warning"></div>
+              <div class="card-body p-4">
+
+                <div class="text-center mb-3">
+                  <div class="agency-logo-wrap bg-light border p-2">
+                    <img src="assets/img/nbi.png" alt="NBI Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                  </div>
+                  <h4 class="fw-bold text-warning mb-0">NBI – CCD</h4>
+                  <p class="text-muted mb-2" style="font-size:.82rem;">National Bureau of Investigation – Cybercrime Division</p>
+                  <p class="text-muted small mb-0 pt-1 text-start" style="border-top:1px solid #eee;">The NBI - Cybercrime Division (CCD) serves as the primary law enforcement unit investigating computer-related, internet-facilitated, and high-tech crimes in the Philippines.</p>
+                </div>
+
+                <div class="mb-3">
+                  <button class="btn btn-sm btn-outline-warning w-100 logo-meaning-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#logoMeaningNBI">
+                    <i class="bi bi-info-circle me-1"></i> Logo Meaning
+                  </button>
+                  <div class="collapse mt-2" id="logoMeaningNBI">
+                    <div class="card card-body py-2 bg-warning bg-opacity-10 border-0" style="font-size:.82rem;">
+                      The NBI badge represents the bureau's identity as the premier investigative agency. The inclusion of digital forensic elements in their modern branding signifies their shift toward technical intelligence and "cutting-edge" forensic analysis.
+                    </div>
+                  </div>
+                </div>
+
+                <a href="agencies/nbi-cybercrime.html" class="btn btn-warning text-white w-100 mt-auto">
+                  <i class="bi bi-arrow-right-circle me-2"></i>View Full Profile
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── NPC ── -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="240">
+            <div class="card agency-card h-100">
+              <div class="card-header-band bg-success"></div>
+              <div class="card-body p-4">
+
+                <div class="text-center mb-3">
+                  <div class="agency-logo-wrap bg-light border p-2">
+                    <img src="assets/img/npc.jpg" alt="NPC Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                  </div>
+                  <h4 class="fw-bold text-success mb-0">NPC</h4>
+                  <p class="text-muted mb-2" style="font-size:.82rem;">National Privacy Commission</p>
+                  <p class="text-muted small mb-0 pt-1 text-start" style="border-top:1px solid #eee;">The National Privacy Commission (NPC) is an independent body mandated to administer and implement the Data Privacy Act of 2012 (DPA).</p>
+                </div>
+
+                <div class="mb-3">
+                  <button class="btn btn-sm btn-outline-success w-100 logo-meaning-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#logoMeaningNPC">
+                    <i class="bi bi-info-circle me-1"></i> Logo Meaning
+                  </button>
+                  <div class="collapse mt-2" id="logoMeaningNPC">
+                    <div class="card card-body py-2 bg-success bg-opacity-10 border-0" style="font-size:.82rem;">
+                      The shield design represents the protection and safeguarding of the fundamental human right to privacy. The blue and gold colors symbolize integrity and the authority of the commission as a regulatory body.
+                    </div>
+                  </div>
+                </div>
+
+                <a href="agencies/npc.html" class="btn btn-success w-100 mt-auto">
+                  <i class="bi bi-arrow-right-circle me-2"></i>View Full Profile
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer-16 footer position-relative">
+    <div class="container">
+      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-start">
+          <div class="col-lg-5">
+            <div class="brand-section">
+              <a href="index.html" class="logo d-flex align-items-center mb-4">
+                <span class="sitename">ICT Governance</span>
+              </a>
+              <p class="brand-description">Promoting transparent, accountable, and efficient use of ICT resources across government agencies.</p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="footer-nav-wrapper">
+              <div class="row">
+                <div class="col-6 col-lg-4">
+                  <div class="nav-column">
+                    <h6>Navigation</h6>
+                    <nav class="footer-nav">
+                      <a href="index.html">Dashboard</a>
+                      <a href="agencies.html">Agencies</a>
+                      <a href="alerts.html">Alerts</a>
+                      <a href="projects.html">Projects</a>
+                      <a href="contact.html">Contact</a>
+                    </nav>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-4">
+                  <div class="nav-column">
+                    <h6>Agencies</h6>
+                    <nav class="footer-nav">
+                      <a href="agencies/dict.html">DICT</a>
+                      <a href="agencies/doj-cybercrime.html">DOJ Cybercrime Task Force</a>
+                      <a href="agencies/nbi-cybercrime.html">NBI Cybercrime Division</a>
+                      <a href="agencies/npc.html">NPC</a>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="copyright">
+                <p>© 
+                  <span class="sitename">ICT Governance</span>. 
+                  All rights reserved. 
+                  <br>
+                  <p>Created by: Ferrer, Jao, & Duran</p>
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="legal-links">
+                <!-- <a href="#!">Privacy Policy</a> -->
+                <!-- <a href="#!">Terms of Service</a> -->
+                <!-- <div class="credits">Template by <a href="https://bootstrapmade.com/">BootstrapMade</a></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

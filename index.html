@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard - ICT Governance</title>
+  <meta name="description" content="ICT Governance Metrics Dashboard">
+  <meta name="keywords" content="ICT, Governance, Dashboard, Metrics">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    /* ── Dashboard-specific overrides ── */
+    .dashboard-main {
+      padding-top: 120px; /* push below fixed header */
+      padding-bottom: 60px;
+      background: #f4f6fb;
+      min-height: 100vh;
+    }
+
+    /* Stat cards */
+    .stat-card {
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      transition: transform .22s, box-shadow .22s;
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .stat-card .icon-wrap {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .stat-card .stat-num { font-size: 2rem; font-weight: 700; line-height: 1; }
+    .stat-card .stat-label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #7a869a; }
+    .stat-card .stat-change { font-size: .8rem; }
+
+    /* Chart containers */
+    .chart-card {
+      border: none; border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      background: #fff;
+    }
+    .chart-card .card-header {
+      background: transparent; border-bottom: 1px solid #edf0f7;
+      font-weight: 600; font-size: .95rem; padding: 1rem 1.25rem .75rem;
+      border-radius: 14px 14px 0 0 !important;
+    }
+    .chart-wrapper { position: relative; height: 260px; }
+    .chart-wrapper-sm { position: relative; height: 200px; }
+
+    /* Filter bar */
+    .filter-bar {
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      padding: 1rem 1.25rem;
+    }
+    .filter-bar .form-select, .filter-bar .form-control {
+      border-radius: 8px; font-size: .875rem;
+    }
+    .filter-bar .btn { border-radius: 8px; font-size: .875rem; }
+
+    /* Progress items */
+    .project-item { padding: .6rem 0; border-bottom: 1px solid #f0f2f7; }
+    .project-item:last-child { border-bottom: none; }
+    .project-item .progress { height: 7px; border-radius: 99px; }
+
+    /* Activity feed */
+    .activity-item { display: flex; gap: 12px; align-items: flex-start; padding: .55rem 0; border-bottom: 1px solid #f0f2f7; }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8rem; flex-shrink: 0; }
+
+    /* Section headings */
+    .section-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #7a869a; margin-bottom: .6rem; }
+
+    /* Tooltip-style badge */
+    .trend-up { color: #22c55e; }
+    .trend-down { color: #ef4444; }
+    .trend-neutral { color: #f59e0b; }
+
+    /* Responsive chart height fix */
+    @media (max-width: 768px) {
+      .chart-wrapper { height: 220px; }
+      .stat-card .stat-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename">ICT Governance</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html" class="active">Dashboard</a></li>
+            <li class="dropdown"><a href="agencies.html"><span>Agencies</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="agencies/dict.html"><i class="bi bi-building me-1"></i>DICT</a></li>
+                <li><a href="agencies/doj-cybercrime.html"><i class="bi bi-shield-fill me-1"></i>DOJ Cybercrime Task Force</a></li>
+                <li><a href="agencies/nbi-cybercrime.html"><i class="bi bi-person-badge-fill me-1"></i>NBI Cybercrime Division</a></li>
+                <li><a href="agencies/npc.html"><i class="bi bi-lock-fill me-1"></i>NPC</a></li>
+              </ul>
+            </li>
+            <li><a href="alerts.html">Alerts</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- ======= /Header ======= -->
+
+  <main class="dashboard-main">
+    <div class="container-fluid px-4">
+
+      <!-- Page Header Row -->
+      <div class="d-flex align-items-center justify-content-between mb-4" data-aos="fade-down">
+        <div>
+          <h4 class="fw-bold mb-0">Metrics Dashboard</h4>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0" style="font-size:.82rem;">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+          <button class="btn btn-sm btn-outline-secondary" id="refreshBtn" title="Refresh dashboard">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+          </button>
+          <button class="btn btn-sm btn-primary" onclick="window.print()">
+            <i class="bi bi-printer me-1"></i>Export
+          </button>
+        </div>
+      </div>
+
+      <!-- ── FILTER BAR ── -->
+      <div class="filter-bar mb-4" data-aos="fade-down" data-aos-delay="50">
+        <div class="row g-2 align-items-end">
+          <div class="col-12 col-md-auto">
+            <p class="section-label mb-1">Filter &amp; Sort</p>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label form-label-sm mb-1">Agency</label>
+            <select class="form-select form-select-sm" id="filterAgency" onchange="applyFilters()">
+              <option value="all">All Agencies</option>
+              <option value="DICT">DICT</option>
+              <option value="DOJ">DOJ Cybercrime Task Force</option>
+              <option value="NBI">NBI Cybercrime Division</option>
+              <option value="NPC">NPC</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-2">
+            <label class="form-label form-label-sm mb-1">Region</label>
+            <select class="form-select form-select-sm" id="filterRegion" onchange="applyFilters()">
+              <option value="all">All Regions</option>
+              <option value="NCR">NCR</option>
+              <option value="CAR">CAR</option>
+              <option value="III">Central Luzon (III)</option>
+              <option value="IVA">CALABARZON (IV-A)</option>
+              <option value="VI">Western Visayas (VI)</option>
+              <option value="VII">Central Visayas (VII)</option>
+              <option value="XI">Davao Region (XI)</option>
+            </select>
+          </div>
+          <!-- <div class="col-6 col-md-2">
+            <label class="form-label form-label-sm mb-1">Period</label>
+            <select class="form-select form-select-sm" id="filterPeriod" onchange="applyFilters()">
+              <option value="Q1-2026">Q1 2026</option>
+              <option value="Q4-2025">Q4 2025</option>
+              <option value="Q3-2025">Q3 2025</option>
+              <option value="Q2-2025">Q2 2025</option>
+              <option value="annual-2025">Annual 2025</option>
+            </select>
+          </div> -->
+          <div class="col-6 col-md-2">
+            <label class="form-label form-label-sm mb-1">Case Type</label>
+            <select class="form-select form-select-sm" id="filterCaseType" onchange="applyFilters()">
+              <option value="all">All Types</option>
+              <option value="cybercrime">Cybercrime</option>
+              <option value="privacy">Privacy Breach</option>
+              <option value="compliance">Non-Compliance</option>
+              <option value="infrastructure">Infrastructure</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-auto ms-md-auto d-flex gap-2">
+            <button class="btn btn-sm btn-primary" onclick="applyFilters()">
+              <i class="bi bi-funnel me-1"></i>Apply
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="resetFilters()">
+              <i class="bi bi-x-lg me-1"></i>Reset
+            </button>
+          </div>
+        </div>
+        <!-- Active filter tags -->
+        <div id="activeFilterTags" class="d-flex flex-wrap gap-2 mt-2"></div>
+      </div>
+
+      <!-- ── STAT CARDS ── -->
+      <div class="row g-3 mb-4">
+
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="60">
+          <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-wrap bg-primary bg-opacity-10 text-primary">
+                <i class="bi bi-shield-exclamation"></i>
+              </div>
+              <div>
+                <div class="stat-num text-primary" id="statCybercrime">8,987</div>
+                <div class="stat-label">Total Cybercrime Cases</div>
+              </div>
+            </div>
+            <div class="stat-change trend-down mt-2" title="Key Insight: Online selling scams dropped by nearly 50% in 2025 due to improved law enforcement."><i class="bi bi-arrow-down-short"></i>Down from 14,529 in 2024</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="120">
+          <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-wrap bg-danger bg-opacity-10 text-danger">
+                <i class="bi bi-cash-coin"></i>
+              </div>
+              <div>
+                <div class="stat-num text-danger" id="statLosses">₱418M</div>
+                <div class="stat-label">Financial Losses (2025)</div>
+              </div>
+            </div>
+            <div class="stat-change trend-up mt-2"><i class="bi bi-arrow-up-short"></i>Up from ~₱198M in 2024</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="180">
+          <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-wrap bg-success bg-opacity-10 text-success">
+                <i class="bi bi-kanban-fill"></i>
+              </div>
+              <div>
+                <div class="stat-num text-success" id="statProjects">~8-10</div>
+                <div class="stat-label">Active ICT Projects</div>
+              </div>
+            </div>
+            <div class="stat-change trend-neutral mt-2"><i class="bi bi-dash"></i>₱18.9B Budget for 2026</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="240">
+          <div class="card stat-card p-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-wrap bg-warning bg-opacity-10 text-warning">
+                <i class="bi bi-wifi"></i>
+              </div>
+              <div>
+                <div class="stat-num text-warning" id="statWifi">18,849</div>
+                <div class="stat-label">Free Wi-Fi Sites</div>
+              </div>
+            </div>
+            <div class="stat-change trend-up mt-2"><i class="bi bi-arrow-up-short"></i>Connecting >11.2M devices</div>
+          </div>
+        </div>
+
+      </div><!-- /stat cards -->
+
+      <!-- ── ROW 1: Cybercrime Bar + Cybercrime Pie ── -->
+      <div class="row g-3 mb-4">
+
+        <!-- Cybercrime Cases by Type (Bar) -->
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="80">
+          <div class="card chart-card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <span><i class="bi bi-bar-chart-fill me-2 text-primary"></i>Cybercrime Cases by Type</span>
+              <div class="d-flex gap-2">
+                <button class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2 chart-toggle active" data-chart="cyberBar" data-type="bar" onclick="switchChartType('cyberBar','bar',this)">Bar</button>
+                <button class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2 chart-toggle" data-chart="cyberBar" data-type="line" onclick="switchChartType('cyberBar','line',this)">Line</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper">
+                <canvas id="cyberBarChart"></canvas>
+              </div>
+              <p class="text-muted mt-2 mb-0" style="font-size:.78rem;">
+                <i class="bi bi-info-circle me-1"></i>
+                Based on CICC data. Key Insight: Online selling scams dropped by nearly 50% in 2025 due to improved law enforcement. Total complaints for 2025 reached 18,633 cases.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cybercrime Cases by Type (Pie/Doughnut) -->
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="140">
+          <div class="card chart-card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <span><i class="bi bi-pie-chart-fill me-2 text-danger"></i>Case Distribution</span>
+              <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="toggleDoughnut()">
+                <i class="bi bi-arrow-repeat"></i>
+              </button>
+            </div>
+            <div class="card-body d-flex flex-column align-items-center">
+              <div class="chart-wrapper-sm w-100">
+                <canvas id="cyberPieChart"></canvas>
+              </div>
+              <!-- Legend -->
+              <div class="mt-2 w-100" id="pieLegend"></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row 1 -->
+
+      <!-- ── ROW 2: Cases by Region + Project Progress ── -->
+      <div class="row g-3 mb-4">
+
+        <!-- Cases by Region (Horizontal Bar) -->
+        <div class="col-lg-7" data-aos="fade-up" data-aos-delay="80">
+          <div class="card chart-card h-100">
+            <div class="card-header">
+              <i class="bi bi-geo-alt-fill me-2 text-warning"></i>Cases by Region
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper">
+                <canvas id="regionBarChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Progress -->
+        <div class="col-lg-5" data-aos="fade-up" data-aos-delay="140">
+          <div class="card chart-card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-list-check me-2 text-primary"></i>Flagship Project Progress</span>
+              <a href="projects.html" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:.8rem;">View All</a>
+            </div>
+            <div class="card-body">
+              <div id="projectProgressList">
+                <!-- Injected by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row 2 -->
+
+    </div><!-- /container-fluid -->
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer-16 footer position-relative">
+    <div class="container">
+      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-start">
+          <div class="col-lg-5">
+            <div class="brand-section">
+              <a href="index.html" class="logo d-flex align-items-center mb-4">
+                <span class="sitename">ICT Governance</span>
+              </a>
+              <p class="brand-description">Promoting transparent, accountable, and efficient use of ICT resources across government agencies.</p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="footer-nav-wrapper">
+              <div class="row">
+                <div class="col-6 col-lg-4">
+                  <div class="nav-column">
+                    <h6>Navigation</h6>
+                    <nav class="footer-nav">
+                      <a href="index.html">Dashboard</a>
+                      <a href="agencies.html">Agencies</a>
+                      <a href="alerts.html">Alerts</a>
+                      <a href="projects.html">Projects</a>
+                      <a href="contact.html">Contact</a>
+                    </nav>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-4">
+                  <div class="nav-column">
+                    <h6>Agencies</h6>
+                    <nav class="footer-nav">
+                      <a href="agencies/dict.html">DICT</a>
+                      <a href="agencies/doj-cybercrime.html">DOJ Cybercrime Task Force</a>
+                      <a href="agencies/nbi-cybercrime.html">NBI Cybercrime Division</a>
+                      <a href="agencies/npc.html">NPC</a>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="copyright">
+                <p>© 
+                  <span class="sitename">ICT Governance</span>. 
+                  All rights reserved. 
+                  <br>
+                  <p>Created by: Ferrer, Jao, & Duran</p>
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="legal-links">
+                <!-- <a href="#!">Privacy Policy</a> -->
+                <!-- <a href="#!">Terms of Service</a> -->
+                <!-- <div class="credits">Template by <a href="https://bootstrapmade.com/">BootstrapMade</a></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ======= /Footer ======= -->
+
+  <!-- Scroll Top -->
+  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ═══════════════════════════════════════════
+       PLACEHOLDER DATA
+    ═══════════════════════════════════════════ */
+    const CYBER_LABELS = ['Consumer Fraud', 'Online Fraud', 'Online Harassment', 'Identity Theft', 'Others'];
+    const CYBER_DATA   = [6453, 4243, 2160, 1626, 4151];
+    const CYBER_COLORS = ['#3b82f6','#ef4444','#f59e0b','#10b981','#6b7280'];
+
+    const REGION_LABELS = ['NCR', 'CALABARZON (IV-A)', 'Central Luzon (III)', 'Central Visayas (VII)', 'Davao Region (XI)', 'Western Visayas (VI)', 'CAR'];
+    const REGION_DATA   = [6250, 3500, 2500, 1500, 1250, 1000, 62];
+
+    const PROJECTS = [
+      { name: 'National Broadband Plan', pct: 65, color: '#3b82f6', agency: 'DICT', status: 'Ongoing' },
+      { name: 'Free Wi-Fi for All', pct: 75, color: '#10b981', agency: 'DICT', status: 'Ongoing' },
+      { name: 'PhilSys (National ID)', pct: 85, color: '#f59e0b', agency: 'PSA', status: 'Ongoing' },
+      { name: 'DigitalJobsPH', pct: 70, color: '#8b5cf6', agency: 'DICT', status: 'Ongoing' },
+      { name: 'National Cybersecurity Plan', pct: 60, color: '#ef4444', agency: 'DICT', status: 'Active' },
+    ];
+
+    /* shared ChartJS defaults */
+    Chart.defaults.font.family = "'Lato', 'Roboto', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#7a869a';
+
+    /* ═══════════════════════════════════════════
+       CHART INSTANCES
+    ═══════════════════════════════════════════ */
+    let cyberBarInstance, cyberPieInstance, regionBarInstance;
+
+    /* 1. Cybercrime Bar Chart */
+    cyberBarInstance = new Chart(document.getElementById('cyberBarChart'), {
+      type: 'bar',
+      data: {
+        labels: CYBER_LABELS,
+        datasets: [{
+          label: 'Cases Reported',
+          data: CYBER_DATA,
+          backgroundColor: CYBER_COLORS,
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          label: ctx => ` ${ctx.parsed.y.toLocaleString()} cases`
+        }}},
+        scales: {
+          y: { grid: { color: '#f0f2f7' }, beginAtZero: true, ticks: { stepSize: 100 } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    /* 2. Cybercrime Pie/Doughnut */
+    cyberPieInstance = new Chart(document.getElementById('cyberPieChart'), {
+      type: 'doughnut',
+      data: { labels: CYBER_LABELS, datasets: [{ data: CYBER_DATA, backgroundColor: CYBER_COLORS, borderWidth: 2, borderColor: '#fff' }] },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: { legend: { display: false } }
+      }
+    });
+    renderLegend('pieLegend', CYBER_LABELS, CYBER_COLORS, CYBER_DATA);
+
+    /* 3. Regional Horizontal Bar */
+    regionBarInstance = new Chart(document.getElementById('regionBarChart'), {
+      type: 'bar',
+      data: {
+        labels: REGION_LABELS,
+        datasets: [{ label: 'Cases', data: REGION_DATA, backgroundColor: '#3b82f6', borderRadius: 4 }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { grid: { color: '#f0f2f7' }, beginAtZero: true }, y: { grid: { display: false } } }
+      }
+    });
+
+    /* ═══════════════════════════════════════════
+       DYNAMIC HTML INJECTIONS
+    ═══════════════════════════════════════════ */
+
+    /* Project Progress List */
+    const pList = document.getElementById('projectProgressList');
+    PROJECTS.forEach(p => {
+      const statusBadge = p.status === 'Completed' ? 'bg-success' : p.status === 'Planning' ? 'bg-warning text-dark' : 'bg-primary';
+      pList.innerHTML += `
+        <div class="project-item">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="fw-medium" style="font-size:.85rem;">${p.name}</span>
+            <span class="badge ${statusBadge} ms-2" style="font-size:.7rem;">${p.pct}%</span>
+          </div>
+          <div class="progress mb-1">
+            <div class="progress-bar" style="width:${p.pct}%;background:${p.color};" role="progressbar" aria-valuenow="${p.pct}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between" style="font-size:.73rem;color:#7a869a;">
+            <span class="d-flex align-items-center">
+              <img src="assets/img/${ p.agency === 'DICT' ? 'dict.png' : p.agency === 'DOJ CTF' ? 'doj.jpg' : p.agency === 'NBI CCD' ? 'nbi.png' : 'npc.jpg' }" alt="Logo" style="width:14px; height:14px; object-fit:contain; margin-right:4px;">
+              ${p.agency}
+            </span>
+            <span class="badge ${statusBadge}" style="font-size:.68rem;">${p.status}</span>
+          </div>
+        </div>`;
+    });
+
+    // Activity and Alert feeds removed along with dummy data.
+
+    /* ═══════════════════════════════════════════
+       HELPER: Legend Builder
+    ═══════════════════════════════════════════ */
+    function renderLegend(containerId, labels, colors, data) {
+      const total = data.reduce((a, b) => a + b, 0);
+      const el = document.getElementById(containerId);
+      el.innerHTML = labels.map((l, i) => `
+        <div class="d-flex align-items-center justify-content-between mb-1" style="font-size:.75rem;">
+          <div class="d-flex align-items-center gap-2">
+            <span style="width:10px;height:10px;border-radius:50%;background:${colors[i]};display:inline-block;flex-shrink:0;"></span>
+            <span>${l}</span>
+          </div>
+          <span class="text-muted">${((data[i]/total)*100).toFixed(1)}%</span>
+        </div>`).join('');
+    }
+
+    /* ═══════════════════════════════════════════
+       CHART TYPE TOGGLE (Bar <-> Line)
+    ═══════════════════════════════════════════ */
+    window.switchChartType = function(chartId, type, btn) {
+      document.querySelectorAll(`.chart-toggle[data-chart="${chartId}"]`).forEach(b => b.classList.remove('active','btn-secondary'));
+      btn.classList.add('active');
+      if (chartId === 'cyberBar') {
+        cyberBarInstance.config.type = type;
+        cyberBarInstance.update();
+      }
+    };
+
+    /* ═══════════════════════════════════════════
+       DOUGHNUT TOGGLE (doughnut <-> pie)
+    ═══════════════════════════════════════════ */
+    window.toggleDoughnut = function() {
+      const current = cyberPieInstance.config.type;
+      cyberPieInstance.config.type = current === 'doughnut' ? 'pie' : 'doughnut';
+      cyberPieInstance.options.cutout = current === 'doughnut' ? 0 : '65%';
+      cyberPieInstance.update();
+    };
+
+    /* ═══════════════════════════════════════════
+       FILTER LOGIC
+    ═══════════════════════════════════════════ */
+    window.applyFilters = function () {
+      const agency  = document.getElementById('filterAgency').value;
+      const region  = document.getElementById('filterRegion').value;
+      const period  = document.getElementById('filterPeriod').value;
+      const ctype   = document.getElementById('filterCaseType').value;
+
+      // Simulate data variation by jittering values based on selection
+      const seed = (agency + region + period + ctype).split('').reduce((a,c) => a + c.charCodeAt(0), 0);
+      const jitter = n => Math.max(1, Math.round(n * (0.7 + (seed % 50) / 100)));
+
+      cyberBarInstance.data.datasets[0].data = CYBER_DATA.map(jitter);
+      cyberBarInstance.update('active');
+
+      cyberPieInstance.data.datasets[0].data = CYBER_DATA.map(jitter);
+      cyberPieInstance.update('active');
+      renderLegend('pieLegend', CYBER_LABELS, CYBER_COLORS, CYBER_DATA.map(jitter));
+
+      regionBarInstance.data.datasets[0].data = REGION_DATA.map(jitter);
+      regionBarInstance.update('active');
+
+      // UI Update is purely visual simulation, but leave stat numbers static where relevant for the report metrics.
+
+      renderActiveFilterTags({ agency, region, period, ctype });
+    };
+
+    window.resetFilters = function () {
+      document.getElementById('filterAgency').value = 'all';
+      document.getElementById('filterRegion').value = 'all';
+      document.getElementById('filterCaseType').value = 'all';
+
+      cyberBarInstance.data.datasets[0].data = CYBER_DATA;
+      cyberBarInstance.update();
+      cyberPieInstance.data.datasets[0].data = CYBER_DATA;
+      cyberPieInstance.update();
+      renderLegend('pieLegend', CYBER_LABELS, CYBER_COLORS, CYBER_DATA);
+      regionBarInstance.data.datasets[0].data = REGION_DATA;
+      regionBarInstance.update();
+
+      const statLosses = document.getElementById('statLosses');
+      if (statLosses) statLosses.textContent = '₱418M';
+      document.getElementById('activeFilterTags').innerHTML = '';
+    };
+
+    function renderActiveFilterTags(filters) {
+      const container = document.getElementById('activeFilterTags');
+      const labels = { agency: 'Agency', region: 'Region', period: 'Period', ctype: 'Type' };
+      container.innerHTML = '';
+      Object.entries(filters).forEach(([k, v]) => {
+        if (v && v !== 'all') {
+          container.innerHTML += `
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size:.75rem;">
+              ${labels[k]}: ${v}
+              <button type="button" class="btn-close btn-close-sm ms-1" style="font-size:.55rem;" onclick="clearFilter('${k}')"></button>
+            </span>`;
+        }
+      });
+    }
+
+    window.clearFilter = function(key) {
+      const el = document.getElementById('filter' + key.charAt(0).toUpperCase() + key.slice(1).replace('type','CaseType').replace('ctype','CaseType'));
+      if (el) el.value = 'all';
+      applyFilters();
+    };
+
+    /* ═══════════════════════════════════════════
+       REFRESH BUTTON
+    ═══════════════════════════════════════════ */
+    document.getElementById('refreshBtn').addEventListener('click', function () {
+      this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Refreshing...';
+      this.disabled = true;
+      setTimeout(() => {
+        this.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh';
+        this.disabled = false;
+        resetFilters();
+        // flash stat cards
+        document.querySelectorAll('.stat-num').forEach(el => {
+          el.style.transition = 'color .3s';
+          el.style.color = '#22c55e';
+          setTimeout(() => el.style.color = '', 800);
+        });
+      }, 1200);
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
